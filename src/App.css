@@ -55,3 +55,7 @@
 .Properties-table td:nth-child(even) {
   background:#ffffff;
 }
+
+.Prop-table-div {
+  margin-top: 50px
+}

@@ -31,8 +31,11 @@ Momentkapacitet - tvärsnitt
 
 Todo:
 Kovertera balkdatan till något som går att ha i en databas.
+Skapa en I-profil-indata
 Lägg till en backend som har databas och beräkningsfunktioner
 Lägg till beräkningsfunktioner.
+Lägg till fler profiler
+Lägga till state som registrear knapptryck så man kan ha en bakåtknapp
 
 Lägg till välja stålsort.
 
