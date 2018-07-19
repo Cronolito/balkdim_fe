@@ -1,0 +1,42 @@
+-------- Vad ska visas: Standardprofiler -------
+Datan kan visas i tabeller
+
+Beror på 3 typer:
+I/H-Profil
+U-Profil
+Rektangulärprofil
+
+--Standard I-profil--
+-Tvärsnittsdata I-profil-:
+Höjd
+Bredd
+Tjocklek fläns
+Tjocklek liv
+
+Area
+mantelyta per m
+Livarea
+vikt/m
+
+Tröghetsmoment
+Elastiskt Böjmotstånd Y
+Plastiskt Böjmotstånd Z
+
+-Kapacitet- alla profiler
+Tvärkraftskapaciet - Tvärsnitt
+Normalkraftskapaciet - Tvärsnitt
+Momentkapacitet - tvärsnitt
+
+Övriga parametrar ska läsas in men kanske inte visas
+
+Todo:
+Kovertera balkdatan till något som går att ha i en databas.
+Lägg till en backend som har databas och beräkningsfunktioner
+Lägg till beräkningsfunktioner.
+
+Lägg till välja stålsort.
+
+Frågor:
+Vilket format ska datan ha? JSON
+
+-------- Vad ska visas: Egen profil-------
