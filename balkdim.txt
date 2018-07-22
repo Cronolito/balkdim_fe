@@ -30,6 +30,7 @@ Momentkapacitet - tvärsnitt
 Övriga parametrar ska läsas in men kanske inte visas
 
 Todo:
+Bättre state i App.js som anger vad som ska visas.
 Kovertera balkdatan till något som går att ha i en databas.
 Skapa en I-profil-indata
 Lägg till en backend som har databas och beräkningsfunktioner

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProfileButton from './Components/ProfileButton.js';
 import PropertiesTable from './Components/PropertiesTable.js';
+import IBeamForm from './Components/IBeamForm.js';
 import './App.css';
 
 class App extends Component {
@@ -69,6 +70,9 @@ class App extends Component {
         </div>
         <div>
           {this.state.generateTable ? <PropertiesTable/>: ""}
+        </div>
+        <div>
+          {this.state.generateTable ? <IBeamForm/>: ""}
         </div>
       </div>
     );

@@ -20,6 +20,9 @@ class PropertiesTable extends Component  {
       density: "vikt/m [kg/m]",
     }
   }
+
+  //TODO: Här bör jag ha en metod som hämtar data från API.
+
   generateRows(){
     let tableRows = [];
     let i =0;
