@@ -2,8 +2,8 @@ import json
 
 # Lista med keys för all data. Samma ska användas för frontendrubriker så man kan loopa genom keys och hämta det som ska
 # visas ur både rubriker och värde
-dict_keys = ['name', 'height', 'width', 'thickness_flange', 'thickness_web', 'radius', 'surface_area', 'area', 'web_area',
-             'density', 'moment_of_inertia', 'W_y', 'Z_y', 'r_y', 'I_z', 'W_z', 'Z_z', 'r_z', 'K_v', 'W_v', 'Z_v', 'C',
+dict_keys = ['name', 'height', 'width', 'flangeThickness', 'webThickness', 'radius', 'surfaceArea', 'area', 'webArea',
+             'density', 'momentOfInertia', 'W_y', 'Z_y', 'r_y', 'I_z', 'W_z', 'Z_z', 'r_z', 'K_v', 'W_v', 'Z_v', 'C',
              'K_w', 'W_w', 'Z_w', 'C_w']
 
 def file_to_dict(fileName):
@@ -52,6 +52,6 @@ file_list = ['HEA.txt', 'HEB.txt', 'IPE.txt']
 to_JSON_list = []
 
 for file_name in file_list:
-    to_JSON_list = to_JSON_list + file_to_dict(file_name)
+    to_JSON_list.append({file_name.replace('.txt',''):file_to_dict(file_name)})
 
 data_to_file(to_JSON_list)

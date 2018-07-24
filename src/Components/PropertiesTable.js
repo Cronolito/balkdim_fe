@@ -7,6 +7,11 @@ class PropertiesTable extends Component  {
   //
   // }
 
+  // dict_keys = ['name', 'height', 'width', 'flangeThickness', 'webThickness', 'radius', 'surfaceArea', 'area', 'webArea',
+  //              'density', 'momentOfInertia', 'W_y', 'Z_y', 'r_y', 'I_z', 'W_z', 'Z_z', 'r_z', 'K_v', 'W_v', 'Z_v', 'C',
+  //              'K_w', 'W_w', 'Z_w', 'C_w']
+
+
   //Anger vad som ska visas i tabellen
   static defaultProps = {
     tableHeadings: {
@@ -18,6 +23,8 @@ class PropertiesTable extends Component  {
       area: "Area [mm2]",
       webArea: "Livarea [mm2]",
       density: "vikt/m [kg/m]",
+      momentOfInertia: "Tröghetsmoment [mm4]",
+      W_y: "Elastiskt böjmoment [mm3]"
     }
   }
 

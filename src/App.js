@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ProfileButton from './Components/ProfileButton.js';
 import PropertiesTable from './Components/PropertiesTable.js';
 import IBeamForm from './Components/IBeamForm.js';
+import beam_data from './beam_data';
 import './App.css';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
     "Egen Profil": ['I-profil',],
     HEA: ['HEA100', 'HEA120',]
   }
+
 
   //Ändrar state till vilka knapptitlar som ska visas och finns inte knapptitlen som keys
  // i props så ändrar den så att tabellen genereras. Vilken data som ska hämtas hittas då
@@ -51,6 +53,22 @@ class App extends Component {
     }
     }
 
+    //Hämtar balkdata och titlar till menyer, bör nog vara componentWillMount
+  componentWillMount(){
+    const beamData = beam_data
+    const standardProfiles = beamData.map( item =>
+      Object.keys(item)[0])
+
+      //Här r jag
+    console.log(beamData[0][standardProfiles[0]]);
+
+    //
+    // const profiles = beamData.map( item =>
+    //   {Object.keys(item)[0]: item[Object.keys(item)[0]].map( profile =>
+    //     profile.name
+    //   )})
+
+  }
 
   render() {
     let buttonsTitlesToRender = this.renderSelector()
