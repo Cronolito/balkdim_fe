@@ -9,64 +9,97 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      buttonPropsTitle: 'defaultButtons',
-      generateTable: false
+      buttonStateTitle: 'defaultButtons',
+      buttonNames: {
+        defaultButtons: ['Standardprofil', 'Egen Profil'],
+        Standardprofil: [],
+        "Egen Profil": ['I-profil',],
+      },
+      generateTable: false,
+      generateForm: false,
+      tableInputKeys: null,
+
     }
     this.handleButtonClick = this.handleButtonClick.bind(this);
     //I state bör jag hålla reda på var man klickat sig vidare för att generera
     //rätt komponenter
   }
 
-  //Anger värden för alla buttons.
-  // Kanske vilja hämta sista nivån från databas?
+  //HÄmta balkdata från json
   static defaultProps = {
-    defaultButtons: ['Standardprofil', 'Egen Profil'],
-    Standardprofil: ['HEA', 'HEB', 'IPE'],
-    "Egen Profil": ['I-profil',],
-    HEA: ['HEA100', 'HEA120',]
+    beamData: beam_data
   }
 
 
   //Ändrar state till vilka knapptitlar som ska visas och finns inte knapptitlen som keys
  // i props så ändrar den så att tabellen genereras. Vilken data som ska hämtas hittas då
- // i state.buttonPropsTitle
+ // i state.buttonStateTitle
   handleButtonClick(buttonTitle){
-    if (Object.keys(this.props).includes(buttonTitle)){
+    //Byta knappar
+    if (Object.keys(this.state.buttonNames).includes(buttonTitle)){
       this.setState({
-        buttonPropsTitle: buttonTitle,
+        buttonStateTitle: buttonTitle,
+    })
+    //Generara input för egen profil
+  } else if (this.state.buttonNames['Egen Profil'].includes(buttonTitle)) {
+    this.setState({
+      buttonStateTitle: null,
+      generateForm: true,
     })
   } else {
+    //Generera tabell och indata för standardprofil
+    var tableInput = ""
+    var profiles = []
+    this.props.beamData.forEach(function(profileGroup){
+      if(Object.keys(profileGroup)[0] === buttonTitle.slice(0,3)){
+        profiles = profileGroup[buttonTitle.slice(0,3)]
+      }
+    })
+
+    profiles.forEach(function(profile){
+      if (profile.name === buttonTitle) {
+        tableInput = profile
+      }
+    })
+
     this.setState({
-      buttonPropsTitle: buttonTitle,
+      buttonStateTitle: null,
       generateTable: true,
+      tableInput: tableInput,
   })
   }
 }
 
   renderSelector(){
     //Väljer vilka knappar som ska renderas beroende på state
-    if(Object.keys(this.props).includes(this.state.buttonPropsTitle)) {
-      let buttonsTitlesToRender = this.props[this.state.buttonPropsTitle]
+    if(Object.keys(this.state.buttonNames).includes(this.state.buttonStateTitle)) {
+      let buttonsTitlesToRender = this.state.buttonNames[this.state.buttonStateTitle]
       return (buttonsTitlesToRender)
     } else {
       return ([])
     }
     }
 
-    //Hämtar balkdata och titlar till menyer, bör nog vara componentWillMount
+
+    //Hämtar balkdata från json. Skapar en dict(beamNames) med balktyp:profilnamn för alla typer. Denna dikt används för att skapa knappnamn i state. sparar tillsist knappnamn och balkdatan i state.
   componentWillMount(){
-    const beamData = beam_data
-    const standardProfiles = beamData.map( item =>
-      Object.keys(item)[0])
 
-      //Här r jag
-    console.log(beamData[0][standardProfiles[0]]);
+    const beamNames = {};
+    this.props.beamData.forEach(function(item) {
+      beamNames[Object.keys(item)[0]]= item[Object.keys(item)[0]].map(profile =>
+      profile.name)
+    })
 
-    //
-    // const profiles = beamData.map( item =>
-    //   {Object.keys(item)[0]: item[Object.keys(item)[0]].map( profile =>
-    //     profile.name
-    //   )})
+    const beamTypes = Object.keys(beamNames);
+    let {buttonNames} = this.state;
+    buttonNames['Standardprofil'] = beamTypes
+    beamTypes.forEach(function(item) {
+      buttonNames[item] = beamNames[item]
+    })
+
+    this.setState({
+      buttonNames:buttonNames,
+    })
 
   }
 
@@ -87,10 +120,10 @@ class App extends Component {
             buttonClicked={this.handleButtonClick} />)})}
         </div>
         <div>
-          {this.state.generateTable ? <PropertiesTable/>: ""}
+          {this.state.generateTable ? <PropertiesTable profileData={this.state.tableInput}/>: ""}
         </div>
         <div>
-          {this.state.generateTable ? <IBeamForm/>: ""}
+          {this.state.generateForm? <IBeamForm/>: ""}
         </div>
       </div>
     );

@@ -1354,8 +1354,8 @@
     {
         "IPE": [
             {
-                "name": "IPE808",
-                "height": 0.0,
+                "name": "IPE80",
+                "height": 80.0,
                 "width": 46.0,
                 "flangeThickness": 5.2,
                 "webThickness": 3.8,

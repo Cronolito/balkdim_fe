@@ -28,8 +28,6 @@ class PropertiesTable extends Component  {
     }
   }
 
-  //TODO: Här bör jag ha en metod som hämtar data från API.
-
   generateRows(){
     let tableRows = [];
     let i =0;
@@ -48,8 +46,9 @@ class PropertiesTable extends Component  {
   }
 
   render(){
+    console.log(this.props.profileData);
     let tableRows = this.generateRows();
-    console.log(tableRows);
+    // console.log(tableRows);
     return (
       <div className="Prop-table-div">
         <table className="Properties-table">
