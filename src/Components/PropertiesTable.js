@@ -19,12 +19,13 @@ class PropertiesTable extends Component  {
       width: "Bredd [mm]",
       flangeThickness: "Tjocklek fläns [mm]",
       webThickness: "Tjocklek liv [mm]",
-      surfaceArea: "mantelyta per m [m2/m]",
       area: "Area [mm2]",
       webArea: "Livarea [mm2]",
-      density: "vikt/m [kg/m]",
+      surfaceArea: "Mantelyta [m2/m]",
+      density: "Vikt/m [kg/m]",
       momentOfInertia: "Tröghetsmoment [mm4]",
-      W_y: "Elastiskt böjmoment [mm3]"
+      W_y: "Elastiskt böjmoment [mm3]",
+      Z_y: "Plastiskt böjmoment [mm3]"
     }
   }
 
@@ -33,24 +34,23 @@ class PropertiesTable extends Component  {
     let i =0;
     let OKeys = Object.keys(this.props.tableHeadings)
 
-    // Bugg ifall man får ojämt antal rubriker. Börskrivas om där man först hämtar datan och sen generar en dict mby.
     for (i=0; i<OKeys.length;i+=2){
       let newRow = [];
       newRow.push(this.props.tableHeadings[OKeys[i]])
-      newRow.push(i)
+      newRow.push(this.props.profileData[OKeys[i]])
       newRow.push(this.props.tableHeadings[OKeys[i+1]])
-      newRow.push(i)
+      newRow.push(this.props.profileData[OKeys[i+1]])
       tableRows.push(newRow)
     }
     return(tableRows)
   }
 
   render(){
-    console.log(this.props.profileData);
     let tableRows = this.generateRows();
-    // console.log(tableRows);
+
     return (
       <div className="Prop-table-div">
+        <h2>{this.props.profileData.name}</h2>
         <table className="Properties-table">
           <thead>
             <tr>
@@ -58,9 +58,9 @@ class PropertiesTable extends Component  {
             </tr>
           </thead>
           <tbody>
-            {tableRows.map( tableRow => {
+            {tableRows.map((tableRow, rowNr) => {
               return(
-                <PropTableRow tableRow={tableRow} />
+                <PropTableRow tableRow={tableRow} key={"tableRow" + rowNr} />
               )
             })}
           </tbody>

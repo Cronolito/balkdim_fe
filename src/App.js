@@ -123,7 +123,7 @@ class App extends Component {
           {this.state.generateTable ? <PropertiesTable profileData={this.state.tableInput}/>: ""}
         </div>
         <div>
-          {this.state.generateForm? <IBeamForm/>: ""}
+          {this.state.generateForm ? <IBeamForm/>: ""}
         </div>
       </div>
     );

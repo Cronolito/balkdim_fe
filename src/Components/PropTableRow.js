@@ -4,9 +4,9 @@ function PropTableRow(props) {
   return(
     <React.Fragment>
       <tr key={props.tableRow[0]}>
-        {props.tableRow.map(data => {
+        {props.tableRow.map((data, cellNr) => {
           return(
-            <td key={data}>{data}</td>
+            <td key={"cellNr" + cellNr}>{data}</td>
           )
         }
         )}
