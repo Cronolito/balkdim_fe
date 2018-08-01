@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
-class IBeamForm extends Component  {
+class TestForm extends Component  {
   constructor(props){
     super(props)
     //Sätt formdatan i state ist?
     this.state = {
-      height: null,
-
+      height: '',
     }
+
   }
-  handleSubmit(event){
+  handleSubmit= (event) => {
     event.preventDefault()
     const data = this.state
     console.log("FGinal data is", data);
 
   }
 
-  //Funk kan även skrivas så här
+  //Funk kan även skrivas så här eller på vanligt sätt, men då måste man binda this.
   handleInputChange = (event) => {
     console.log(event.target.name);
     console.log(event.target.value);
@@ -55,4 +55,4 @@ class IBeamForm extends Component  {
   }
 }
 
-export default IBeamForm;
+export default TestForm;

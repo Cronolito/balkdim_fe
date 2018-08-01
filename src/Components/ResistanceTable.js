@@ -1,51 +1,45 @@
 import React, { Component } from 'react';
 import PropTableRow from './PropTableRow.js';
+import calculateSectionRes from '../BeamDesign/SectionResistance.js'
+import roundedToFixed from '../BeamDesign/OtherFunctions.js'
 
-class PropertiesTable extends Component  {
+
+class ResistanceTable extends Component  {
 
   //Anger vad som ska visas i tabellen
   static defaultProps = {
     tableHeadings: {
-      height: "Höjd [mm]",
-      width: "Bredd [mm]",
-      flangeThickness: "Tjocklek fläns [mm]",
-      webThickness: "Tjocklek liv [mm]",
-      area: "Area [mm2]",
-      webArea: "Livarea [mm2]",
-      surfaceArea: "Mantelyta [m2/m]",
-      density: "Vikt/m [kg/m]",
-      momentOfInertia: "Tröghetsmoment [mm4]",
-      W_y: "Elastiskt böjmoment [mm3]",
-      Z_y: "Plastiskt böjmoment [mm3]"
+      normalForce: "Normalkraft [kN]",
+      shearForce: "Tvärkraft [kN]",
+      momentY: "Moment [kNm]",
     }
   }
 
-  generateRows(){
+  generateRowData(){
     let tableRows = [];
     let i =0;
     let OKeys = Object.keys(this.props.tableHeadings)
+    let resistanceData = calculateSectionRes(this.props.profileData)
 
-    for (i=0; i<OKeys.length;i+=2){
+    for (i=0; i<OKeys.length;i++){
       let newRow = [];
       newRow.push(this.props.tableHeadings[OKeys[i]])
-      newRow.push(this.props.profileData[OKeys[i]])
-      newRow.push(this.props.tableHeadings[OKeys[i+1]])
-      newRow.push(this.props.profileData[OKeys[i+1]])
+      newRow.push(roundedToFixed(resistanceData[OKeys[i]],1))
+
       tableRows.push(newRow)
     }
     return(tableRows)
   }
 
   render(){
-    let tableRows = this.generateRows();
+    let tableRows = this.generateRowData();
 
     return (
       <div className="Prop-table-div">
-        <h2>{this.props.profileData.name}</h2>
         <table className="Properties-table">
           <thead>
             <tr>
-              <th colSpan="4" style={{textAlign: 'center',}}>Tvärsnittsdata</th>
+              <th colSpan="2" style={{textAlign: 'center',}}>Snittkapaciteter</th>
             </tr>
           </thead>
           <tbody>
@@ -61,4 +55,4 @@ class PropertiesTable extends Component  {
   }
 }
 
-export default PropertiesTable;
+export default ResistanceTable;

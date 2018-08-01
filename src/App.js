@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ProfileButton from './Components/ProfileButton.js';
 import PropertiesTable from './Components/PropertiesTable.js';
-import IBeamForm from './Components/IBeamForm.js';
+import ResistanceTable from './Components/ResistanceTable.js';
+import BeamForm from './Components/BeamForm.js';
 import beam_data from './beam_data';
 import './App.css';
 
@@ -17,9 +18,21 @@ class App extends Component {
       },
       generateTable: false,
       generateForm: false,
-      tableInputKeys: null,
 
     }
+    //Beroende på vilken egen profil man väljer, skapas inputform från dessa. name:label.
+    //Bara att fylla på med mer profiler här och i state
+    this.formHeaders = {
+      'I-profil': {
+        topFlangeWidth: 'Bredd överfläns [mm]',
+        topFlangeThickness: 'Tjocklek överfläns [mm]',
+        webHeight: 'Livhöjd [mm]',
+        webThickness: 'Livtjocklek [mm]',
+        bottomFlangeWidth: 'Bredd underfläns [mm]',
+        bottomFlangeThickness: 'Tjocklek underfläns [mm]'
+      },
+    }
+
     this.handleButtonClick = this.handleButtonClick.bind(this);
     //I state bör jag hålla reda på var man klickat sig vidare för att generera
     //rätt komponenter
@@ -43,7 +56,7 @@ class App extends Component {
     //Generara input för egen profil
   } else if (this.state.buttonNames['Egen Profil'].includes(buttonTitle)) {
     this.setState({
-      buttonStateTitle: null,
+      buttonStateTitle: buttonTitle,
       generateForm: true,
     })
   } else {
@@ -79,7 +92,6 @@ class App extends Component {
       return ([])
     }
     }
-
 
     //Hämtar balkdata från json. Skapar en dict(beamNames) med balktyp:profilnamn för alla typer. Denna dikt används för att skapa knappnamn i state. sparar tillsist knappnamn och balkdatan i state.
   componentWillMount(){
@@ -121,9 +133,10 @@ class App extends Component {
         </div>
         <div>
           {this.state.generateTable ? <PropertiesTable profileData={this.state.tableInput}/>: ""}
+          {this.state.generateTable ? <ResistanceTable profileData={this.state.tableInput}/>: ""}
         </div>
         <div>
-          {this.state.generateForm ? <IBeamForm/>: ""}
+          {this.state.generateForm ? <BeamForm formHeaders={this.formHeaders[this.state.buttonStateTitle]}/>: ""}
         </div>
       </div>
     );

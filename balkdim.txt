@@ -30,13 +30,11 @@ Momentkapacitet - tvärsnitt
 Övriga parametrar ska läsas in men kanske inte visas
 
 Todo:
-Bättre state i App.js som anger vad som ska visas.
-Kovertera balkdatan till något som går att ha i en databas.
 Skapa en I-profil-indata
 Lägg till en backend som har databas och beräkningsfunktioner
 Lägg till beräkningsfunktioner.
 Lägg till fler profiler
-Lägga till state som registrear knapptryck så man kan ha en bakåtknapp
+Lägga till state som registrear knapptryck så man kan ha en bakåtknapp. görs med history och router
 
 Lägg till välja stålsort.
 

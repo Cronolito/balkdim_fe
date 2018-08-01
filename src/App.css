@@ -57,5 +57,9 @@
 }
 
 .Prop-table-div {
-  margin-top: 10px
+  margin-top: 20px;
+}
+
+.Input-beam {
+  width: 50px;
 }
